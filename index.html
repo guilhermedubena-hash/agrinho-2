@@ -3,97 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoAgro Tech - Simulador de Manejo Sustentável</title>
+  <title>EcoAgro Tech | Agrinho 2026</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header class="main-header">
-    <div class="header-container">
-      <h1>🌾 EcoAgro Tech</h1>
-      <p>Simulador de Manejo Sustentável • Concurso Agrinho 2026</p>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="emoji">🌾</span> <strong>EcoAgro Tech</strong>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre o Projeto</a></li>
+        <li><a href="#simulador">Simulador</a></li>
+        <li><a href="#praticas">Práticas Sustentáveis</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header id="inicio" class="hero-section">
+    <div class="hero-content">
+      <span class="badge">Concurso Agrinho 2026</span>
+      <h1>Agro Forte, Futuro Sustentável</h1>
+      <p>Descubra como equilibrar a alta produtividade agrícola com a preservação real do meio ambiente através da tecnologia e do manejo consciente.</p>
+      <a href="#simulador" class="btn-primary">Testar Simulador</a>
     </div>
   </header>
 
-  <main class="simulation-container">
-    
-    <section class="panel-controls">
-      <h2>Manejo da Propriedade</h2>
-      <p class="instruction">Escolha as práticas agrícolas para cada setor e clique em simular:</p>
-      
-      <form id="simulator-form">
-        <div class="control-group">
-          <label for="setor-agua">💧 Gestão de Água:</label>
-          <select id="setor-agua" required>
-            <option value="" disabled selected>Selecione uma opção...</option>
-            <option value="inundacao">Irrigação por Inundação (Gasto excessivo)</option>
-            <option value="aspersao">Aspersão Comum (Consumo moderado)</option>
-            <option value="gotejamento">Gotejamento Automatizado (Alta eficiência)</option>
-          </select>
-        </div>
+  <section id="sobre" class="section-padding grid-clean">
+    <div class="info-block">
+      <h2>O Equilíbrio entre Produção e Meio Ambiente</h2>
+      <p class="subtitle">O grande desafio do campo no século XXI é produzir mais alimentos utilizando menos recursos.</p>
+      <p>O <strong>EcoAgro Tech</strong> é uma ferramenta educacional desenvolvida para conscientizar estudantes e produtores rurais. O objetivo é demonstrar, de forma prática e imediata, que a sustentabilidade não reduz o lucro — pelo contrário, ela garante a longevidade e a saúde financeira da propriedade rural.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>+90%</h3>
+        <p>De economia de água usando irrigação inteligente.</p>
+      </div>
+      <div class="stat-card">
+        <h3>100%</h3>
+        <p>Foco na preservação e biodiversidade do solo.</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="control-group">
-          <label for="setor-solo">🌱 Manejo do Solo:</label>
-          <select id="setor-solo" required>
-            <option value="" disabled selected>Selecione uma opção...</option>
-            <option value="convencional">Arado Convencional (Risco de erosão)</option>
-            <option value="minimo">Cultivo Mínimo (Proteção parcial)</option>
-            <option value="direto">Plantio Direto e Rotação de Culturas (Excelente)</option>
-          </select>
-        </div>
+  <section id="simulador" class="simulator-section">
+    <div class="section-header">
+      <h2>Simulador de Manejo Sustentável</h2>
+      <p>Tome decisões reais de campo e monitore os impactos imediatos nos indicadores econômicos e ecológicos.</p>
+    </div>
 
-        <div class="control-group">
-          <label for="setor-pragas">🐛 Controle de Pragas:</label>
-          <select id="setor-pragas" required>
-            <option value="" disabled selected>Selecione uma opção...</option>
-            <option value="quimico">Defensivos Químicos Calendarizados (Uso massivo)</option>
-            <option value="pontual">Aplicação Química Pontual (Uso controlado)</option>
-            <option value="mip">Manejo Integrado de Pragas - MIP (Biológico + Técnico)</option>
-          </select>
-        </div>
+    <div class="simulator-grid">
+      <div class="sim-card inputs-card">
+        <h3>⚙️ Painel de Decisões</h3>
+        <form id="form-agro">
+          <div class="input-group">
+            <label for="agua">💧 Gestão de Recursos Hídricos</label>
+            <select id="agua">
+              <option value="" disabled selected>Escolha o método...</option>
+              <option value="ruim">Irrigação por Inundação (Gasto excessivo e erosão)</option>
+              <option value="medio">Aspersão Comum (Consumo e evaporação moderados)</option>
+              <option value="bom">Gotejamento Automatizado (Eficiência máxima de água)</option>
+            </select>
+          </div>
 
-        <button type="button" id="btn-simular" onclick="calcularImpacto()">Simular Impacto</button>
-      </form>
-    </section>
+          <div class="input-group">
+            <label for="solo">🌱 Conservação do Solo</label>
+            <select id="solo">
+              <option value="" disabled selected>Escolha o manejo...</option>
+              <option value="ruim">Arado Convencional (Degrada a estrutura e causa erosão)</option>
+              <option value="medio">Cultivo Mínimo (Reduz o impacto, mas expõe o solo)</option>
+              <option value="bom">Plantio Direto e Rotação (Proteção total e nutrientes)</option>
+            </select>
+          </div>
 
-    <section class="panel-results">
-      <h2>Indicadores de Desempenho</h2>
-      
-      <div class="metric">
-        <div class="metric-info">
-          <span>Lucro Econômico:</span>
-          <span id="txt-lucro">0%</span>
-        </div>
-        <div class="progress-bar"><div id="bar-lucro" class="bar" style="width: 0%;"></div></div>
+          <div class="input-group">
+            <label for="pragas">🐛 Controle de Pragas e Doenças</label>
+            <select id="pragas">
+              <option value="" disabled selected>Escolha o controle...</option>
+              <option value="ruim">Defensivos Químicos Calendarizados (Uso massivo e contínuo)</option>
+              <option value="medio">Aplicação Química Pontual (Uso apenas quando necessário)</option>
+              <option value="bom">Manejo Integrado (MIP) (Biológico, técnico e focado)</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-simulate" onclick="rodarSimulacao()">Calcular Impacto Atual</button>
+        </form>
       </div>
 
-      <div class="metric">
-        <div class="metric-info">
-          <span>Saúde Ambiental:</span>
-          <span id="txt-ambiental">0%</span>
+      <div class="sim-card results-card">
+        <h3>📊 Indicadores em Tempo Real</h3>
+        
+        <div class="metric-wrapper">
+          <div class="metric-label">
+            <span>Produtividade & Lucro:</span>
+            <span id="label-lucro">0%</span>
+          </div>
+          <div class="progress-bg"><div id="barra-lucro" class="progress-fill"></div></div>
         </div>
-        <div class="progress-bar"><div id="bar-ambiental" class="bar" style="width: 0%;"></div></div>
-      </div>
 
-      <hr>
+        <div class="metric-wrapper">
+          <div class="metric-label">
+            <span>Preservação Ambiental:</span>
+            <span id="label-ambiental">0%</span>
+          </div>
+          <div class="progress-bg"><div id="barra-ambiental" class="progress-fill"></div></div>
+        </div>
 
-      <div class="total-score">
-        <h3>Equilíbrio Sustentável</h3>
-        <div class="circle-score">
-          <span id="txt-equilibrio">0%</span>
+        <div class="divider"></div>
+
+        <div class="score-container">
+          <h4>Índice de Equilíbrio Sustentável</h4>
+          <div id="circulo-resultado" class="score-badge">0%</div>
+        </div>
+
+        <div id="mensagem-feedback" class="feedback-text">
+          Selecione as opções de manejo acima e clique em "Calcular Impacto" para ver o relatório da fazenda.
         </div>
       </div>
+    </div>
+  </section>
 
-      <div id="feedback-mensagem" class="feedback-box">
-        Selecione as opções do painel para iniciar a simulação do seu ecossistema.
+  <section id="praticas" class="section-padding background-alt">
+    <div class="section-header">
+      <h2>Pilares do Agro Sustentável</h2>
+      <p>Entenda a teoria por trás das melhores escolhas no nosso simulador.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💧</div>
+        <h3>Água de Precisão</h3>
+        <p>A irrigação inteligente direciona a água direto para a raiz da planta, reduzindo o desperdício por evaporação em até 90% e protegendo os lençóis freáticos.</p>
       </div>
-    </section>
+      <div class="feature-card">
+        <div class="feature-icon">🌱</div>
+        <h3>Solo Vivo</h3>
+        <p>O Plantio Direto mantém a palhada da colheita anterior sobre a terra. Isso evita a erosão pela chuva, mantém a umidade e enriquece o solo com matéria orgânica.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🐛</div>
+        <h3>Defesa Biológica</h3>
+        <p>O Manejo Integrado de Pragas (MIP) utiliza inimigos naturais dos insetos vilões antes de recorrer aos químicos, reduzindo custos e evitando a contaminação.</p>
+      </div>
+    </div>
+  </section>
 
-  </main>
-
-  <footer class="main-footer">
-    <p>"Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
-    <p class="credits">Desenvolvido para o Concurso Agrinho 2026. Logotipo autoral via Canva. Imagens via Unsplash.</p>
+  <footer class="footer">
+    <p><strong>EcoAgro Tech</strong> — Projeto Temático Agrinho 2026</p>
+    <p class="subfooter">Tema: "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
+    <p class="credits">Logotipo autoral desenvolvido no Canva. Identidade e código criados pelo estudante. Imagens conceituais via Unsplash.</p>
   </footer>
 
   <script src="script.js"></script>

@@ -1,120 +1,76 @@
-function calcularImpacto() {
-  // Captura dos elementos do DOM
-  const agua = document.getElementById("setor-agua").value;
-  const solo = document.getElementById("setor-solo").value;
-  const pragas = document.getElementById("setor-pragas").value;
+function rodarSimulacao() {
+  const agua = document.getElementById("agua").value;
+  const solo = document.getElementById("solo").value;
+  const pragas = document.getElementById("pragas").value;
 
-  // Validação simples se todos os campos foram escolhidos
+  // Impede execução se faltar resposta
   if (!agua || !solo || !pragas) {
-    alert("Por favor, selecione uma opção para todos os setores do painel.");
+    alert("Por favor, preencha todas as três escolhas de manejo para calcular.");
     return;
   }
 
-  // Pontuações base iniciais
-  let lucro = 0;
-  let ambiental = 0;
+  let lucroTotal = 0;
+  let ambientalTotal = 0;
 
-  // Processamento das escolhas de Água
-  switch (agua) {
-    case "inundacao":
-      lucro += 70; ambiental += 20;
-      break;
-    case "aspersao":
-      lucro += 80; ambiental += 50;
-      break;
-    case "gotejamento":
-      lucro += 95; ambiental += 95;
-      break;
-  }
+  // Lógica Água
+  if (agua === "ruim") { lucroTotal += 70; ambientalTotal += 10; }
+  else if (agua === "medio") { lucroTotal += 85; ambientalTotal += 55; }
+  else if (agua === "bom") { lucroTotal += 100; ambientalTotal += 100; }
 
-  // Processamento das escolhas de Solo
-  switch (solo) {
-    case "convencional":
-      lucro += 60; ambiental += 10;
-      break;
-    case "minimo":
-      lucro += 75; ambiental += 60;
-      break;
-    case "direto":
-      lucro += 95; ambiental += 100;
-      break;
-  }
+  // Lógica Solo
+  if (solo === "ruim") { lucroTotal += 60; ambientalTotal += 10; }
+  else if (solo === "medio") { lucroTotal += 80; ambientalTotal += 60; }
+  else if (solo === "bom") { lucroTotal += 100; ambientalTotal += 100; }
 
-  // Processamento das escolhas de Pragas
-  switch (pragas) {
-    case "quimico":
-      lucro += 85; ambiental += 15;
-      break;
-    case "pontual":
-      lucro += 80; ambiental += 65;
-      break;
-    case "mip":
-      lucro += 95; ambiental += 95;
-      break;
-  }
+  // Lógica Pragas
+  if (pragas === "ruim") { lucroTotal += 80; ambientalTotal += 10; }
+  else if (pragas === "medio") { lucroTotal += 85; ambientalTotal += 65; }
+  else if (pragas === "bom") { lucroTotal += 100; ambientalTotal += 100; }
 
-  // Média dos valores para os eixos principais
-  const mediaLucro = Math.round(lucro / 3);
-  const mediaAmbiental = Math.round(ambiental / 3);
+  // Médias Finais
+  const lucroFinal = Math.round(lucroTotal / 3);
+  const ambientalFinal = Math.round(ambientalTotal / 3);
+  const equilibrioFinal = Math.round((lucroFinal + ambientalFinal) / 2);
+
+  // Exibir dados na tela
+  document.getElementById("label-lucro").innerText = `${lucroFinal}%`;
+  document.getElementById("label-ambiental").innerText = `${ambientalFinal}%`;
+  document.getElementById("circulo-resultado").innerText = `${equilibrioFinal}%`;
+
+  // Mover as barras
+  document.getElementById("barra-lucro").style.width = `${lucroFinal}%`;
+  document.getElementById("barra-ambiental").style.width = `${ambientalFinal}%`;
+
+  // Setar as cores de resposta baseadas na performance
+  aplicarCores(lucroFinal, "barra-lucro");
+  aplicarCores(ambientalFinal, "barra-ambiental");
   
-  // Cálculo do Equilíbrio Sustentável (Média Harmônica ou Ponderada para penalizar extremos)
-  // Se houver muita discrepância entre os valores, a nota de equilíbrio cai.
-  const equilibrio = Math.round((mediaLucro + mediaAmbiental) / 2);
+  // Cor do círculo de equilíbrio
+  const circulo = document.getElementById("circulo-resultado");
+  const feedback = document.getElementById("mensagem-feedback");
 
-  // Atualização dos textos na interface
-  document.getElementById("txt-lucro").innerText = `${mediaLucro}%`;
-  document.getElementById("txt-ambiental").innerText = `${mediaAmbiental}%`;
-  document.getElementById("txt-equilibrio").innerText = `${equilibrio}%`;
-
-  // Atualização das larguras das barras de progresso
-  document.getElementById("bar-lucro").style.width = `${mediaLucro}%`;
-  document.getElementById("bar-ambiental").style.width = `${mediaAmbiental}%`;
-
-  // Definição de cores baseada em faixas de performance
-  definirCoresDasBarras(mediaLucro, "bar-lucro");
-  definirCoresDasBarras(mediaAmbiental, "bar-ambiental");
-  definirCorDoCirculo(equilibrio);
-
-  // Geração do feedback textual adaptativo
-  gerarFeedback(equilibrio, mediaLucro, mediaAmbiental);
+  if (equilibrioFinal >= 85) {
+    circulo.style.backgroundColor = "#2e7d32"; // Verde Escuro
+    feedback.style.borderLeftColor = "#2e7d32";
+    feedback.innerText = "🏆 Perfeito! Produtividade máxima com total respeito ecológico. Esse é o Agro Forte idealizado pelo Concurso Agrinho!";
+  } else if (equilibrioFinal >= 60) {
+    circulo.style.backgroundColor = "#ef6c00"; // Laranja
+    feedback.style.borderLeftColor = "#ef6c00";
+    feedback.innerText = "⚠️ Bom desempenho, mas cuidado. Algumas de suas decisões estão gerando desperdícios ou desgastes ambientais que podem custar caro no futuro.";
+  } else {
+    circulo.style.backgroundColor = "#c62828"; // Vermelho
+    feedback.style.borderLeftColor = "#c62828";
+    feedback.innerText = "🛑 Crítico. O ecossistema está seriamente comprometido ou o negócio se tornou inviável financeiramente. Repense as técnicas usadas.";
+  }
 }
 
-function definirCoresDasBarras(valor, idElemento) {
+function aplicarCores(valor, idElemento) {
   const elemento = document.getElementById(idElemento);
-  if (valor < 50) {
-    elemento.style.backgroundColor = "#d32f2f"; // Vermelho
-  } else if (valor < 80) {
-    elemento.style.backgroundColor = "#f57c00"; // Laranja/Amarelo
+  if (valor >= 85) {
+    elemento.style.backgroundColor = "#4caf50";
+  } else if (valor >= 60) {
+    elemento.style.backgroundColor = "#ef6c00";
   } else {
-    elemento.style.backgroundColor = "#388e3c"; // Verde
-  }
-}
-
-function definirCorDoCirculo(valor) {
-  const circulo = document.getElementById("circle-score");
-  if (valor < 50) {
-    circulo.style.backgroundColor = "#d32f2f";
-  } else if (valor < 80) {
-    circulo.style.backgroundColor = "#f57c00";
-  } else {
-    circulo.style.backgroundColor = "#2e7d32";
-  }
-}
-
-function gerarFeedback(equilibrio, lucro, ambiental) {
-  const feedbackBox = document.getElementById("feedback-mensagem");
-  
-  if (equilibrio === 100 || (lucro >= 90 && ambiental >= 95)) {
-    feedbackBox.style.borderLeftColor = "#2e7d32";
-    feedbackBox.innerText = "🏆 Excelente! Você atingiu o equilíbrio máximo. Sua propriedade produz de forma altamente eficiente enquanto preserva integralmente os recursos naturais para as próximas gerações.";
-  } else if (equilibrio >= 75) {
-    feedbackBox.style.borderLeftColor = "#4caf50";
-    feedbackBox.innerText = "👍 Muito bom! Você está no caminho certo para um Agro Forte e Sustentável. Pequenos ajustes em tecnologias de precisão podem te levar aos 100%.";
-  } else if (lucro > ambiental) {
-    feedbackBox.style.borderLeftColor = "#f57c00";
-    feedbackBox.innerText = "⚠️ Alerta Econômico Alto: Sua produtividade está gerando lucros rápidos, mas a degradação do solo, o desperdício de água e o uso de químicos ameaçam a sobrevivência da propriedade a longo prazo.";
-  } else {
-    feedbackBox.style.borderLeftColor = "#d32f2f";
-    feedbackBox.innerText = "🛑 Desequilíbrio Crítico: Suas decisões comprometeram seriamente o ecossistema ou inviabilizaram a rentabilidade econômica do produtor. Reveja suas escolhas técnicas.";
+    elemento.style.backgroundColor = "#e53935";
   }
 }
