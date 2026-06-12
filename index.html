@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoAgro Tech - Simulador de Manejo Sustentável</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="header-container">
+      <h1>🌾 EcoAgro Tech</h1>
+      <p>Simulador de Manejo Sustentável • Concurso Agrinho 2026</p>
+    </div>
+  </header>
+
+  <main class="simulation-container">
+    
+    <section class="panel-controls">
+      <h2>Manejo da Propriedade</h2>
+      <p class="instruction">Escolha as práticas agrícolas para cada setor e clique em simular:</p>
+      
+      <form id="simulator-form">
+        <div class="control-group">
+          <label for="setor-agua">💧 Gestão de Água:</label>
+          <select id="setor-agua" required>
+            <option value="" disabled selected>Selecione uma opção...</option>
+            <option value="inundacao">Irrigação por Inundação (Gasto excessivo)</option>
+            <option value="aspersao">Aspersão Comum (Consumo moderado)</option>
+            <option value="gotejamento">Gotejamento Automatizado (Alta eficiência)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="setor-solo">🌱 Manejo do Solo:</label>
+          <select id="setor-solo" required>
+            <option value="" disabled selected>Selecione uma opção...</option>
+            <option value="convencional">Arado Convencional (Risco de erosão)</option>
+            <option value="minimo">Cultivo Mínimo (Proteção parcial)</option>
+            <option value="direto">Plantio Direto e Rotação de Culturas (Excelente)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="setor-pragas">🐛 Controle de Pragas:</label>
+          <select id="setor-pragas" required>
+            <option value="" disabled selected>Selecione uma opção...</option>
+            <option value="quimico">Defensivos Químicos Calendarizados (Uso massivo)</option>
+            <option value="pontual">Aplicação Química Pontual (Uso controlado)</option>
+            <option value="mip">Manejo Integrado de Pragas - MIP (Biológico + Técnico)</option>
+          </select>
+        </div>
+
+        <button type="button" id="btn-simular" onclick="calcularImpacto()">Simular Impacto</button>
+      </form>
+    </section>
+
+    <section class="panel-results">
+      <h2>Indicadores de Desempenho</h2>
+      
+      <div class="metric">
+        <div class="metric-info">
+          <span>Lucro Econômico:</span>
+          <span id="txt-lucro">0%</span>
+        </div>
+        <div class="progress-bar"><div id="bar-lucro" class="bar" style="width: 0%;"></div></div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-info">
+          <span>Saúde Ambiental:</span>
+          <span id="txt-ambiental">0%</span>
+        </div>
+        <div class="progress-bar"><div id="bar-ambiental" class="bar" style="width: 0%;"></div></div>
+      </div>
+
+      <hr>
+
+      <div class="total-score">
+        <h3>Equilíbrio Sustentável</h3>
+        <div class="circle-score">
+          <span id="txt-equilibrio">0%</span>
+        </div>
+      </div>
+
+      <div id="feedback-mensagem" class="feedback-box">
+        Selecione as opções do painel para iniciar a simulação do seu ecossistema.
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <p>"Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
+    <p class="credits">Desenvolvido para o Concurso Agrinho 2026. Logotipo autoral via Canva. Imagens via Unsplash.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

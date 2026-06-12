@@ -1,0 +1,197 @@
+/* Configurações Gerais e Cores */
+:root {
+  --primary-color: #2e7d32;
+  --primary-light: #4caf50;
+  --accent-color: #f57c00;
+  --bg-color: #f1f8e9;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --text-light: #666666;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Cabeçalho */
+.main-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.main-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Layout Principal em Grid */
+.simulation-container {
+  max-width: 1100px;
+  width: 90%;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .simulation-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Estilo dos Painéis (Cards) */
+.panel-controls, .panel-results {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.instruction {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+/* Formulários e Inputs */
+.control-group {
+  margin-bottom: 1.5rem;
+}
+
+.control-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.control-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.control-group select:focus {
+  border-color: var(--primary-light);
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e65100;
+}
+
+/* Indicadores e Barras de Progresso */
+.metric {
+  margin-bottom: 1.5rem;
+}
+
+.metric-info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease-out, background-color 0.5s;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 2rem 0;
+}
+
+/* Pontuação de Equilíbrio (Círculo) */
+.total-score {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.circle-score {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.5s;
+}
+
+/* Mensagem Dinâmica */
+.feedback-box {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 5px solid #ccc;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Rodapé */
+.main-footer {
+  background-color: #212121;
+  color: #b0bec5;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.credits {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #78909c;
+}
